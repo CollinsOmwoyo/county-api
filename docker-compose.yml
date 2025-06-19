@@ -26,17 +26,17 @@ services:
       - county_network
 
   # From my Requuirements an Optional App Service (to be added on Day 28)
-  # county-api:
-  #   build: .
-  #   ports:
-  #     - "3000:3000"
-  #   env_file:
-  #     - .env
-  #   depends_on:
-  #     - postgres
-  #     - redis
-  #   networks:
-  #     - county_network
+  county-api:
+      build: .
+      ports:
+        - "3000:3000"
+      env_file:
+        - .env
+      depends_on:
+        - postgres
+        - redis
+      networks:
+        - county_network
 
 volumes:
   pgdata:
