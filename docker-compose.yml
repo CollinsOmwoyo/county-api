@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: county_postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - county_network
+
+  redis:
+    image: redis:7
+    container_name: county_redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - county_network
+
+  # From my Requuirements an Optional App Service (to be added on Day 28)
+  # county-api:
+  #   build: .
+  #   ports:
+  #     - "3000:3000"
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - postgres
+  #     - redis
+  #   networks:
+  #     - county_network
+
+volumes:
+  pgdata:
+
+networks:
+  county_network:
+    driver: bridge
