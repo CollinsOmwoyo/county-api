@@ -14,5 +14,5 @@ email: string;
 password: string;
 
 @IsEnum(UserRole)
-role: UserRole;
+  role: UserRole;
 }
