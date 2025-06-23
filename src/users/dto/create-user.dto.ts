@@ -3,6 +3,10 @@ import { userRole } from "../enums/user-role.enum";
 export class CreateUserDto {
 @IsNotEmpty()
 @MinLength(3)
+name: string;
+
+    @IsNotEmpty()
+@MinLength(3)
 username: string;
 
 @IsNotEmpty()
