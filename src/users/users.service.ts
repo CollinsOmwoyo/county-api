@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 
+
 @Injectable()
 export class UsersService {
     constructor(
@@ -25,16 +26,21 @@ export class UsersService {
         return this.userRepository.find();
     }
     
-    async findOne(id: number): Promise<User> {
-        return this.userRepository.findOneBy({ id });
+    async findOne(id: string): Promise<User> {
+        
+        const user = await this.userRepository.findOne({ where: { id } });
+        if (!user) {
+            throw new Error(`User with ID ${id} not found`);
+        }
+        return user;
     }
     
-    async update(id: number, updateUserDto: Partial<CreateUserDto>): Promise<User> {
+    async update(id: string, updateUserDto: Partial<CreateUserDto>): Promise<User> {
         await this.userRepository.update(id, updateUserDto);
         return this.findOne(id);
     }
     
-    async remove(id: number): Promise<void> {
+    async remove(id: string): Promise<void> {
         await this.userRepository.delete(id);
     }
 }
