@@ -1,5 +1,4 @@
 import { IsEmail, IsEnum, IsNotEmpty, MinLength } from "class-validator";
-import { UserRole } from "../user-role.enum.ts";
 export class CreateUserDto {
 @IsNotEmpty()
 @MinLength(3)
