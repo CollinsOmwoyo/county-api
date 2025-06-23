@@ -58,7 +58,7 @@ describe('UsersService', () => {
 
       const result = await service.create(dto);
 
-      expect(bcrypt.hash).toHaveBeenCalledWith(dto.password, expect.any(String));
+      expect(bcrypt.hash).toHaveBeenCalledWith(dto.password, 10);
       expect(mockUserRepository.create).toHaveBeenCalledWith({
         ...dto,
         password: hashedPassword,
