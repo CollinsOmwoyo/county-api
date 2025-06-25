@@ -3,9 +3,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { JwtStrategy } from './auth/strategies/jwt.strategy';
 import { LocalStrategy } from './auth/strategies/local.strategy';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -33,6 +34,6 @@ import { LocalStrategy } from './auth/strategies/local.strategy';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService, LocalStrategy],
+  providers: [AppService, LocalStrategy, JwtStrategy],
 })
 export class AppModule {}
