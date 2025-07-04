@@ -5,23 +5,25 @@ jest.mock('bcrypt', () => ({
 
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import * as bcrypt from 'bcrypt';
-import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { userRole } from './enums/user-role.enum';
 import { UsersService } from './users.service';
 
 describe('UsersService', () => {
   let service: UsersService;
-  let repository: jest.Mocked<Repository<User>>;
-
-  const mockUserRepository = {
-    create: jest.fn(),
-    save: jest.fn(),
-    findOneBy: jest.fn(),
+  let mockUserRepository: {
+    create: jest.Mock;
+    save: jest.Mock;
+    findOneBy: jest.Mock;
   };
 
   beforeEach(async () => {
+    mockUserRepository = {
+      create: jest.fn(),
+      save: jest.fn(),
+      findOneBy: jest.fn(),
+    };
+
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UsersService,
@@ -33,7 +35,6 @@ describe('UsersService', () => {
     }).compile();
 
     service = module.get<UsersService>(UsersService);
-    repository = module.get(getRepositoryToken(User));
   });
 
   afterEach(() => {
@@ -54,16 +55,15 @@ describe('UsersService', () => {
         role: userRole.CITIZEN,
       };
 
-      const hashedPassword = await bcrypt.hash(dto.password, 10);
-      jest.spyOn(bcrypt, 'hash').mockResolvedValue(hashedPassword);
-
+      const hashedPassword = 'hashed_password';
       const mockUser = { ...dto, password: hashedPassword, id: 'uuid' };
-      mockUserRepository.create.mockReturnValue(mockUser as User);
-      mockUserRepository.save.mockResolvedValue(mockUser as User);
+
+      mockUserRepository.create.mockReturnValue(mockUser);
+      mockUserRepository.save.mockResolvedValue(mockUser);
 
       const result = await service.create(dto);
 
-      expect(bcrypt.hash).toHaveBeenCalledWith(dto.password, 10);
+      expect(require('bcrypt').hash).toHaveBeenCalledWith(dto.password, 10);
       expect(mockUserRepository.create).toHaveBeenCalledWith({
         ...dto,
         password: hashedPassword,
@@ -73,4 +73,3 @@ describe('UsersService', () => {
     });
   });
 });
-
