@@ -6,8 +6,8 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtStrategy } from './auth/strategies/jwt.strategy';
 import { LocalStrategy } from './auth/strategies/local.strategy';
-import { UsersModule } from './users/users.module';
 import { ServiceCatalogModule } from './service-catalog/service-catalog.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
