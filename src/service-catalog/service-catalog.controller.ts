@@ -9,12 +9,12 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Roles } from '../auth/decorators/roles.decorator';
+import { Roles } from '../auth/roles.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { RolesGuard } from '../auth/guards/roles.guard';
+import { RolesGuard } from '../auth/guards/roles.guards';
 import { userRole } from '../users/enums/user-role.enum';
-import { CreateServiceCatalogDto } from './dto/create-service-catalog.dto';
-import { UpdateServiceCatalogDto } from './dto/update-service-catalog.dto';
+import { CreateServiceDto } from './dto/create-service.dto';
+import { UpdateServiceDto } from './dto/update-service.dto';
 import { ServiceCatalog } from './entities/service-catalog.entity';
 import { ServiceCatalogService } from './service-catalog.service';
 
@@ -29,7 +29,7 @@ export class ServiceCatalogController {
   @Roles(userRole.ADMIN)
   @ApiOperation({ summary: 'Create a new service' })
   @ApiResponse({ status: 201, description: 'Service created successfully', type: ServiceCatalog })
-  create(@Body() dto: CreateServiceCatalogDto): Promise<ServiceCatalog> {
+  create(@Body() dto: CreateServiceDto): Promise<ServiceCatalog> {
     return this.serviceCatalogService.create(dto);
   }
 
@@ -62,7 +62,7 @@ export class ServiceCatalogController {
   @ApiResponse({ status: 200, description: 'Service updated', type: ServiceCatalog })
   update(
     @Param('id') id: string,
-    @Body() dto: UpdateServiceCatalogDto,
+    @Body() dto: UpdateServiceDto,
   ): Promise<ServiceCatalog> {
     return this.serviceCatalogService.update(id, dto);
   }

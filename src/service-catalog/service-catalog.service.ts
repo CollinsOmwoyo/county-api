@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CreateServiceDto } from './dto/create-service.dto';
+import { UpdateServiceDto } from './dto/update-service.dto';
 import { ServiceCatalog } from './entities/service-catalog.entity';
-import { CreateServiceCatalogDto } from './dto/create-service-catalog.dto';
-import { UpdateServiceCatalogDto } from './dto/update-service-catalog.dto';
 
 @Injectable()
 export class ServiceCatalogService {
@@ -12,7 +12,7 @@ export class ServiceCatalogService {
     private readonly serviceRepository: Repository<ServiceCatalog>,
   ) {}
 
-  async create(createDto: CreateServiceCatalogDto): Promise<ServiceCatalog> {
+  async create(createDto: CreateServiceDto): Promise<ServiceCatalog> {
     const newService = this.serviceRepository.create(createDto);
     return await this.serviceRepository.save(newService);
   }
@@ -29,7 +29,7 @@ export class ServiceCatalogService {
     return service;
   }
 
-  async update(id: string, updateDto: UpdateServiceCatalogDto): Promise<ServiceCatalog> {
+  async update(id: string, updateDto: UpdateServiceDto): Promise<ServiceCatalog> {
     const existingService = await this.findOne(id);
     const updated = this.serviceRepository.merge(existingService, updateDto);
     return await this.serviceRepository.save(updated);
