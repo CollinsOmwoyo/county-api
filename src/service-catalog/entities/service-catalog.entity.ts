@@ -3,9 +3,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { ServiceRequest } from '../../requests/entities/service-request.entity';
 
 @Entity()
 export class ServiceCatalog {
@@ -39,4 +41,7 @@ export class ServiceCatalog {
   @ApiProperty({ description: 'Timestamp when the service was last updated' })
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => ServiceRequest, request => request.service)
+  requests: ServiceRequest[];
 }
