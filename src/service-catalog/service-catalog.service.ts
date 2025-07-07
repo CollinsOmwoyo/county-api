@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ServiceCatalog } from './entities/service-catalog.entity';
-import { CreateServiceCatalogDto } from /dto/create-service-catalog.dto';
+import { CreateServiceCatalogDto } from './dto/create-service-catalog.dto';
 import { UpdateServiceCatalogDto } from './dto/update-service-catalog.dto';
 
 

@@ -1,12 +1,12 @@
 import {
-    Body,
-    Controller,
-    Delete,
-    Get,
-    Param,
-    Patch,
-    Post,
-    UseGuards,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Roles } from '../auth/decorators/roles.decorator';
@@ -49,7 +49,7 @@ export class ServiceCatalogController {
 
   @Get(':id')
   @ApiOperation({ summary: 'Get a service by ID' })
-  @ApiResponse({ status: 200, description: 'Service found', type: ServiceCatalog })
+  @ApiResponse({ status: 200, description: 'Service found', type: [ServiceCatalog] })
   findOne(@Param('id') id: string): Promise<ServiceCatalog> {
     return this.serviceCatalogService.findOne(id);
   }
@@ -57,7 +57,7 @@ export class ServiceCatalogController {
   @Patch(':id')
   @Roles(userRole.ADMIN)
   @ApiOperation({ summary: 'Update a service by ID' })
-  @ApiResponse({ status: 200, description: 'Service updated', type: ServiceCatalog })
+  @ApiResponse({ status: 200, description: 'Service updated', type: [ServiceCatalog] })
   update(
     @Param('id') id: string,
     @Body() dto: UpdateServiceCatalogDto,
