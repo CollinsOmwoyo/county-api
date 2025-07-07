@@ -1,9 +1,11 @@
-import {
-  Entity, PrimaryGeneratedColumn, Column, CreateDateColumn,
-  ManyToOne,
-} from 'typeorm';
-import { User } from '../users/entities/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import {
+    Column, CreateDateColumn,
+    Entity,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+} from 'typeorm';
+import { User } from '../../users/entities/user.entity';
 
 @Entity('audit_logs')
 export class AuditLog {

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ServiceRequest } from './entities/service-request.entity';
-import { RequestsController } from './requests.controller';
-import { RequestsService } from './requests.service';
-import { UsersModule } from '../users/users.module';
 import { ServiceCatalogModule } from '../service-catalog/service-catalog.module';
+import { UsersModule } from '../users/users.module';
+import { RequestsController } from './controllers/requests.controller';
+import { ServiceRequest } from './entities/service-request.entity';
+import { RequestsService } from './services/requests.service';
 
 @Module({
   imports: [

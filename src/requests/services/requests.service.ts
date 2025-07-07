@@ -1,11 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ServiceRequest } from './entities/service-request.entity';
-import { CreateRequestDto } from './dto/create-request.dto';
-import { AssignOfficerDto } from './dto/assign-officer.dto';
-import { UpdateStatusDto } from './dto/update-status.dto';
-import { RequestStatus } from './enums/request-status.enum';
+import { AssignOfficerDto } from '../dto/assign-officer.dto';
+import { CreateRequestDto } from '../dto/create-request.dto';
+import { UpdateStatusDto } from '../dto/update-request-status.dto';
+import { ServiceRequest } from '../entities/service-request.entity';
+import { RequestStatus } from '../enums/request-status.enum';
 
 @Injectable()
 export class RequestsService {

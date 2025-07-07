@@ -1,19 +1,26 @@
 import {
-  Controller, Post, Body, UseGuards, Request, Get,
-  Query, Param, Patch, Delete,
+    Body,
+    Controller,
+    Get,
+    Param, Patch,
+    Post,
+    Query,
+    Request,
+    UseGuards
 } from '@nestjs/common';
 import {
-  ApiTags, ApiBearerAuth, ApiOperation, ApiResponse,
+    ApiBearerAuth, ApiOperation, ApiResponse,
+    ApiTags,
 } from '@nestjs/swagger';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { RolesGuard } from '../auth/guards/roles.guard';
-import { Roles } from '../auth/decorators/roles.decorator';
-import { userRole } from '../users/enums/user-role.enum';
-import { RequestsService } from './requests.service';
-import { CreateRequestDto } from './dto/create-request.dto';
-import { AssignOfficerDto } from './dto/assign-officer.dto';
-import { UpdateStatusDto } from './dto/update-status.dto';
-import { ServiceRequest } from './entities/service-request.entity';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../../auth/guards/roles.guards';
+import { Roles } from '../../auth/roles.decorator';
+import { userRole } from '../../users/enums/user-role.enum';
+import { AssignOfficerDto } from '../dto/assign-officer.dto';
+import { CreateRequestDto } from '../dto/create-request.dto';
+import { UpdateStatusDto } from '../dto/update-request-status.dto';
+import { ServiceRequest } from '../entities/service-request.entity';
+import { RequestsService } from '../services/requests.service';
 
 @ApiBearerAuth()
 @ApiTags('Requests')
