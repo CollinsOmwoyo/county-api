@@ -1,34 +1,33 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { getRepositoryToken } from '@nestjs/typeorm';
-import { ServiceCatalog } from './entities/service-catalog.entity';
+import { ServiceCatalogController } from './service-catalog.controller';
 import { ServiceCatalogService } from './service-catalog.service';
 
-describe('ServiceCatalogService', () => {
-  let service: ServiceCatalogService;
+describe('ServiceCatalogController', () => {
+  let controller: ServiceCatalogController;
 
-  const mockRepository = {
+  const mockService = {
     create: jest.fn(),
-    save: jest.fn(),
-    find: jest.fn(),
-    findOneBy: jest.fn(),
+    findAll: jest.fn(),
+    findOne: jest.fn(),
+    update: jest.fn(),
     remove: jest.fn(),
   };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      controllers: [ServiceCatalogController],
       providers: [
-        ServiceCatalogService,
         {
-          provide: getRepositoryToken(ServiceCatalog),
-          useValue: mockRepository,
+          provide: ServiceCatalogService,
+          useValue: mockService,
         },
       ],
     }).compile();
 
-    service = module.get<ServiceCatalogService>(ServiceCatalogService);
+    controller = module.get<ServiceCatalogController>(ServiceCatalogController);
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
+    expect(controller).toBeDefined();
   });
 });
