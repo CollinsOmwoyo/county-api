@@ -26,7 +26,7 @@ export class ServiceCatalog {
 
   @ApiProperty({ example: 'Public Works', description: 'Department offering the service' })
   @Column({ length: 100 })
-  department: string;
+  category: string;
 
   @ApiProperty({ example: true, description: 'Whether the service is currently active' })
   @Column({ default: true })
