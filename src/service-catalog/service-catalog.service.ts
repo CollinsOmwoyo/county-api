@@ -5,7 +5,6 @@ import { ServiceCatalog } from './entities/service-catalog.entity';
 import { CreateServiceCatalogDto } from './dto/create-service-catalog.dto';
 import { UpdateServiceCatalogDto } from './dto/update-service-catalog.dto';
 
-
 @Injectable()
 export class ServiceCatalogService {
   constructor(
@@ -14,26 +13,26 @@ export class ServiceCatalogService {
   ) {}
 
   async create(createDto: CreateServiceCatalogDto): Promise<ServiceCatalog> {
-    const service = this.serviceRepository.create(createDto);
-    return this.serviceRepository.save(service);
+    const newService = this.serviceRepository.create(createDto);
+    return await this.serviceRepository.save(newService);
   }
 
   async findAll(): Promise<ServiceCatalog[]> {
-    return this.serviceRepository.find();
+    return await this.serviceRepository.find();
   }
 
   async findOne(id: string): Promise<ServiceCatalog> {
     const service = await this.serviceRepository.findOneBy({ id });
     if (!service) {
-      throw new NotFoundException(`Service with id ${id} not found`);
+      throw new NotFoundException(`Service with ID '${id}' not found.`);
     }
     return service;
   }
 
   async update(id: string, updateDto: UpdateServiceCatalogDto): Promise<ServiceCatalog> {
-    const service = await this.findOne(id);
-    Object.assign(service, updateDto);
-    return this.serviceRepository.save(service);
+    const existingService = await this.findOne(id);
+    const updated = this.serviceRepository.merge(existingService, updateDto);
+    return await this.serviceRepository.save(updated);
   }
 
   async remove(id: string): Promise<void> {
