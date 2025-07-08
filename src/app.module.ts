@@ -8,6 +8,7 @@ import { JwtStrategy } from './auth/strategies/jwt.strategy';
 import { LocalStrategy } from './auth/strategies/local.strategy';
 import { ServiceCatalogModule } from './service-catalog/service-catalog.module';
 import { UsersModule } from './users/users.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -35,6 +36,8 @@ import { UsersModule } from './users/users.module';
     AuthModule,
 
     ServiceCatalogModule,
+
+    FilesModule,
   ],
   controllers: [AppController],
   providers: [AppService, LocalStrategy, JwtStrategy],
