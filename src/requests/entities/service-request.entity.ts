@@ -4,9 +4,11 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Document } from '../../files/entities/document.entity';
 import { ServiceCatalog } from '../../service-catalog/entities/service-catalog.entity';
 import { User } from '../../users/entities/user.entity';
 import { RequestStatus } from '../enums/request-status.enum';
@@ -38,4 +40,7 @@ export class ServiceRequest {
 
   @ApiProperty({ description: 'When request was last updated' })
   @UpdateDateColumn() updatedAt: Date;
+  @ApiProperty({ type: () => [Document]})
+  @OneToMany(() => Document, (doc) => doc.request)
+  documents: Document[];
 }
