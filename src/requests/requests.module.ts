@@ -1,5 +1,6 @@
-import { Module,forwardRef } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { FilesModule } from '../files/files.module';
 import { ServiceCatalogModule } from '../service-catalog/service-catalog.module';
 import { UsersModule } from '../users/users.module';
 import { RequestsController } from './controllers/requests.controller';
@@ -10,6 +11,7 @@ import { RequestsService } from './services/requests.service';
   imports: [
     TypeOrmModule.forFeature([ServiceRequest]),
     UsersModule,
+    FilesModule,
     forwardRef(() => ServiceCatalogModule),
   ],
   controllers: [RequestsController],
