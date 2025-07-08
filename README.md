@@ -1,206 +1,155 @@
-<div align="center">
-<h1 align="center">Unified County Services API (UCS-API)</h1>
-<p align="center">
-A modular, API-first backend system designed to help Kenyan counties digitize public service delivery.
-<br />
-<a href="https://www.google.com/search?q=http://localhost:3000/api"><strong>Explore the API Docs »</strong></a>
-<br />
-<br />
-<a href="https://github.com/[YOUR_GITHUB_USERNAME]/county-api/issues">Report Bug</a>
-·
-<a href="https://www.google.com/search?q=https://github.com/%5BYOUR_GITHUB_USERNAME%5D/county-api/issues">Request Feature</a>
-</p>
-</div>
 
-About The Project
-The Unified County Services API (UCS-API) is a robust, scalable, and secure backend solution designed to serve as the digital backbone for public service delivery in Kenya. It provides a comprehensive suite of APIs that handle the common, complex infrastructure required for digital services, allowing county development teams to focus on building excellent citizen-facing web and mobile applications.
+# 🌍 Unified County Services API (UCS-API)
 
-Conceived as a white-label, multi-tenant-ready system, UCS-API aims to reduce redundant development efforts across counties, lower the barrier to digitization, and promote a standardized, efficient approach to e-governance.
+> A modular, API-first backend designed to digitize public service delivery across Kenyan counties.
 
-Built With
-This project leverages a modern, scalable, and type-safe technology stack:
+[📘 Explore API Docs](http://localhost:3001/api) • [🐞 Report Bug](https://github.com/[YOUR_GITHUB_USERNAME]/county-api/issues) • [✨ Request Feature](https://github.com/[YOUR_GITHUB_USERNAME]/county-api/issues)
 
-NestJS: A progressive Node.js framework for building efficient, reliable and scalable server-side applications.
+---
 
-TypeScript: For strong typing and improved developer experience.
+## 🧩 About The Project
 
-PostgreSQL: A powerful, open-source object-relational database system.
+The UCS-API serves as the digital backbone for public service delivery in Kenya. It provides a scalable suite of backend APIs to accelerate digitization across counties.
 
-TypeORM: An ORM that can run in NodeJS and can be used with TypeScript.
+**Key goals:**
 
-Docker: For containerization and consistent development/production environments.
+- 💼 Reduce redundant development work across counties  
+- 🏛 Promote standardized, efficient e-governance  
+- ⚙️ Provide infrastructure for secure and scalable public services  
 
-Redis & BullMQ: For high-performance caching and robust background job processing.
+---
 
-Passport.js: For flexible and modular authentication.
+## ⚒ Built With
 
-Swagger (OpenAPI): For generating beautiful and interactive API documentation.
+- **NestJS** – Scalable Node.js framework  
+- **TypeScript** – Type-safe development  
+- **PostgreSQL** – Relational database  
+- **TypeORM** – Object-relational mapper  
+- **Docker** – Containerization  
+- **Redis & BullMQ** – Queued background jobs  
+- **Passport.js** – Authentication strategies  
+- **Swagger (OpenAPI)** – Beautiful auto-generated API docs  
 
-Key Features
-Feature
+---
 
-Description
+## 🎯 Key Features
 
-Status
+| ✅ Feature                | 📋 Description                                                      |
+|--------------------------|---------------------------------------------------------------------|
+| Authentication & RBAC    | Secure login system with roles (Citizen, Officer, Admin)           |
+| User Registry            | Full CRUD for citizen/staff accounts                               |
+| Service Catalog          | Dynamic creation of county services                                |
+| Request Management       | Submit, track, and process service requests                        |
+| Audit Trails             | Critical action logging for compliance                             |
+| Secure File Uploads      | Document upload via Cloudinary                                     |
+| Payment Gateway          | M-Pesa STK Push integration via Daraja API *(In Progress)*         |
+| Notification Engine      | SMS/Email queuing framework *(In Progress)*                        |
 
-Authentication & RBAC
+---
 
-Secure JWT-based auth with roles for Citizen, Officer, and Admin.
+## 🚀 Getting Started
 
-✅ Complete
+### Prerequisites
 
-User Registry
+Ensure you have:
 
-Full CRUD operations for managing citizen and staff profiles.
+- Node.js `v18+`  
+- Docker & Docker Compose  
+- npm or yarn
 
-✅ Complete
+### Installation
 
-Service Catalog
-
-Admins can dynamically create and manage all offered county services.
-
-✅ Complete
-
-Request Management
-
-End-to-end workflow for submitting, tracking, and processing service requests.
-
-✅ Complete
-
-Audit Trails
-
-Automatic logging of critical actions for compliance and accountability.
-
-✅ Complete
-
-Secure File Uploads
-
-Integration with Cloudinary for handling sensitive document uploads.
-
-✅ Complete
-
-Payment Gateway
-
-Integration with Safaricom Daraja API for M-Pesa STK Push payments.
-
-⏳ In Progress
-
-Notification Engine
-
-Foundation for SMS/Email notifications via a message queue.
-
-⏳ In Progress
-
-Getting Started
-To get a local copy up and running, follow these simple steps.
-
-Prerequisites
-Ensure you have the following installed on your local machine:
-
-Node.js (v18 or later)
-
-Docker and Docker Compose
-
-npm or yarn
-
-Installation
-Clone the repository:
-
-git clone https://github.com/[YOUR_GITHUB_USERNAME]/county-api.git
+```bash
+git clone https://github.com/collinsomwoyo/county-api.git
 cd county-api
-
-Install NPM packages:
-
 npm install
-
-Configure Environment Variables:
-Create a .env file by copying the example and filling in your credentials.
-
 cp .env.example .env
+```
 
-See the .env.example file for a full list of required variables.
+Edit your `.env` file with your credentials.
 
-Launch Docker Containers:
-This command starts the PostgreSQL database and Redis cache in the background.
+### Start Services
 
+```bash
 docker-compose up -d
+```
 
-Usage
-Once the setup is complete, you can run the application.
+---
 
-Run in Development Mode:
+## 🧪 Running the App
 
+### Development
+
+```bash
 npm run start:dev
+```
 
-The server will start with hot-reloading enabled at http://localhost:3000.
+Server runs on `http://localhost:3001`.
 
-Run in Production Mode:
+### Production
 
+```bash
 npm run build
 npm run start:prod
+```
 
-API Reference
-The complete, interactive API documentation is automatically generated and available at the /api endpoint.
+---
 
-Navigate to http://localhost:3001/api to explore all available endpoints.
+## 📖 API Reference
 
-Roadmap
-The project is currently in Phase 3: Integrations.
+Explore the Swagger documentation at:  
+**<http://localhost:3001/api>**
 
-[x] Phase 1: Foundation
+---
 
-[x] Project Scaffolding & Docker Setup
+## 🛣 Roadmap
 
-[x] User Module & Database Schema
+✅ **Phase 1: Foundation**  
 
-[x] JWT Authentication & Role-Based Access Control (RBAC)
+- Project scaffolding, Docker setup, JWT auth  
 
-[x] Phase 2: Core Service Delivery
+✅ **Phase 2: Core Services**  
 
-[x] Service Catalog Management
+- Service catalog, request workflow, audit logs  
 
-[x] Request Management Workflow
+⏳ **Phase 3: Integrations**  
 
-[x] Audit Trail Implementation
+- Secure uploads, M-Pesa payments, job queues  
 
-[ ] Phase 3: Integrations
+🔜 **Phase 4: Polish & Deployment**  
 
-[x] Secure Document Uploads (Cloudinary)
+- Analytics, CI/CD, cloud deployment
 
-[ ] M-Pesa Payment Gateway (Safaricom Daraja)
+---
 
-[ ] Background Job Queues (Redis & BullMQ)
+## 🤝 Contributing
 
-[ ] Phase 4: Polish & Deployment
+We welcome contributions!
 
-[ ] Analytics & Reporting Endpoints
+```bash
+# Fork the repo
+git checkout -b feature/AmazingFeature
+git commit -m 'Add AmazingFeature'
+git push origin feature/AmazingFeature
+```
 
-[ ] CI/CD Pipeline with GitHub Actions
+Then open a Pull Request.  
+⭐ Don’t forget to star the repo if you like the project!
 
-[ ] Deployment to a Cloud Provider (e.g., Railway, Render)
+---
 
-See the open issues for a full list of proposed features (and known issues).
+## 📄 License
 
-Contributing
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+Distributed under the **MIT License**.  
+See `LICENSE.txt` for details.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+---
 
-Fork the Project
+## 📬 Contact
 
-Create your Feature Branch (git checkout -b feature/AmazingFeature)
+**Collins Omwoyo** — [collinsomwoyo@gmail.com](mailto:collinsomwoyo@gmail.com)  
+GitHub: [https://github.com/collinsomwoyo/county-api](https://github.com/collinsomwoyo/county-api)
 
-Commit your Changes (git commit -m 'Add some AmazingFeature')
+```
 
-Push to the Branch (git push origin feature/AmazingFeature)
-
-Open a Pull Request
-
-License
-Distributed under the MIT License. See LICENSE.txt for more information.
-
-Contact
-Collins Omwoyo - collinsomwoyo@gmail.com
-
-Project Link: https://github.com/collinsomwoyo/county-api
+Let me know if you'd like it optimized for GitHub Pages, with badges, or if you want help writing a contributing guide! 🚀
