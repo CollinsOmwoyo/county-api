@@ -3,7 +3,7 @@
 
 > A modular, API-first backend designed to digitize public service delivery across Kenyan counties.
 
-[📘 Explore API Docs](http://localhost:3001/api) • [🐞 Report Bug](https://github.com/[YOUR_GITHUB_USERNAME]/county-api/issues) • [✨ Request Feature](https://github.com/[YOUR_GITHUB_USERNAME]/county-api/issues)
+[📘 Explore API Docs](http://localhost:3001/api) • [🐞 Report Bug](https://github.com/collinsomwoyo/county-api/issues) • [✨ Request Feature](https://github.com/collinsomwoyo/county-api/issues)
 
 ---
 
@@ -124,7 +124,7 @@ Explore the Swagger documentation at:
 
 ## 🤝 Contributing
 
-We welcome contributions!
+I welcome contributions!
 
 ```bash
 # Fork the repo
@@ -152,4 +152,3 @@ GitHub: [https://github.com/collinsomwoyo/county-api](https://github.com/collins
 
 ```
 
-Let me know if you'd like it optimized for GitHub Pages, with badges, or if you want help writing a contributing guide! 🚀
