@@ -1,4 +1,3 @@
-// src/notifications/dto/create-notification.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsIn, IsString } from 'class-validator';
 
