@@ -1,19 +1,43 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Test, TestingModule } from '@nestjs/testing';
 import { CreateNotificationDto } from './create-notification.dto';
+import { NotificationsController } from './notifications.controller';
 import { NotificationsService } from './notifications.service';
 
-@ApiTags('Notifications')
-@Controller('notifications')
-export class NotificationsController {
-  constructor(private readonly notificationsService: NotificationsService) {}
+describe('NotificationsController', () => {
+  let controller: NotificationsController;
+  let service: NotificationsService;
 
-  @Post()
-  @ApiOperation({ summary: 'Queue a notification for processing' })
-  @ApiResponse({ status: 201, description: 'Notification queued successfully' })
-  @ApiResponse({ status: 400, description: 'Invalid payload' })
-  async sendNotification(@Body() dto: CreateNotificationDto) {
-    await this.notificationsService.notifyUser(dto.type, dto.recipient, dto.message);
-    return { message: 'Notification has been queued.' };
-  }
-}
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [NotificationsController],
+      providers: [
+        {
+          provide: NotificationsService,
+          useValue: {
+            notifyUser: jest.fn().mockResolvedValue(undefined),
+          },
+        },
+      ],
+    }).compile();
+
+    controller = module.get<NotificationsController>(NotificationsController);
+    service = module.get<NotificationsService>(NotificationsService);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+
+  it('should call notifyUser and return confirmation message', async () => {
+    const dto: CreateNotificationDto = {
+      type: 'email',
+      recipient: 'test@example.com',
+      message: 'Test Message',
+    };
+
+    const response = await controller.sendNotification(dto);
+
+    expect(service.notifyUser).toHaveBeenCalledWith(dto.type, dto.recipient, dto.message);
+    expect(response).toEqual({ message: 'Notification has been queued.' });
+  });
+});
