@@ -1,14 +1,16 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { InjectQueue } from '@nestjs/bull';
+import { Injectable } from '@nestjs/common';
+import { Queue } from 'bull';
 
 @Injectable()
 export class NotificationsService {
-  private readonly logger = new Logger('Notifications');
+  constructor(@InjectQueue('notifications') private readonly queue: Queue) {}
 
-  notifyUser(userId: string, message: string) {
-    this.logger.log(`Notify User ${userId}: ${message}`);
-  }
-
-  notifyOfficer(officerId: string, message: string) {
-    this.logger.log(`Notify Officer ${officerId}: ${message}`);
+  async notifyUser(type: string, recipient: string, message: string) {
+    await this.queue.add('send-notification', {
+      type,
+      recipient,
+      message,
+    });
   }
 }
