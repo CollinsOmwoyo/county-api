@@ -1,6 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { Response } from 'express';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
 
@@ -9,17 +10,11 @@ async function bootstrap() {
 
   app.use(helmet());
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
-    }),
-  );
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
 
   const config = new DocumentBuilder()
     .setTitle('County Services API')
-    .setDescription('API for citizen services, authentication, and administration')
+    .setDescription('API for citizen services, authentication and administration')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
@@ -27,9 +22,10 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  const port = process.env.PORT || 3001;
-  await app.listen(port);
-  console.log(`🚀 Application is running on: http://localhost:${port}`);
-  console.log(`📘 Swagger docs available at: http://localhost:${port}/api`);
+  app.getHttpAdapter().get('/', (req, res: Response) => {
+    res.redirect('/api');
+  });
+
+  await app.listen(process.env.PORT || 3001);
 }
 bootstrap();
