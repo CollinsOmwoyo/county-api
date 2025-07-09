@@ -7,11 +7,19 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.use(helmet()); // Security headers
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
+  app.use(helmet());
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
+
   const config = new DocumentBuilder()
     .setTitle('County Services API')
-    .setDescription('API for citizen services, authentication and administration')
+    .setDescription('API for citizen services, authentication, and administration')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
@@ -19,6 +27,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3001);
+  const port = process.env.PORT || 3001;
+  await app.listen(port);
+  console.log(`🚀 Application is running on: http://localhost:${port}`);
+  console.log(`📘 Swagger docs available at: http://localhost:${port}/api`);
 }
 bootstrap();
