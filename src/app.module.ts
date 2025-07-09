@@ -1,14 +1,15 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { NotificationsModule } from 'notifications/notifications.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { JwtStrategy } from './auth/strategies/jwt.strategy';
 import { LocalStrategy } from './auth/strategies/local.strategy';
+import { FilesModule } from './files/files.module';
 import { ServiceCatalogModule } from './service-catalog/service-catalog.module';
 import { UsersModule } from './users/users.module';
-import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { FilesModule } from './files/files.module';
     ServiceCatalogModule,
 
     FilesModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService, LocalStrategy, JwtStrategy],
